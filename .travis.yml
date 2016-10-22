@@ -1,0 +1,14 @@
+language: ruby
+branches:
+  only:
+    - master
+services:
+  - docker
+
+before_install:
+- docker login -u="$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+
+script:
+- docker build --no-cache -t cloudqq/electron-docker-dev-5.9.0 .
+- docker tag cloudqq/electron-docker-dev-5.9.0:latest cloudqq/electron-docker-dev-5.9.0:v1
+- docker push cloudqq/electron-docker-dev-5.9.0
